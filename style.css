@@ -1,3 +1,4 @@
+
 body {
   font-family: Arial, sans-serif;
   text-align: center;
@@ -11,3 +12,22 @@ video {
   border: 2px solid #333;
   border-radius: 8px;
 }
+
+.controls {
+  margin-top: 20px;
+}
+
+button, a {
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+}
+
+a:hover, button:hover {
+  background-color: #0056b3;

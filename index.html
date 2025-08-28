@@ -1,15 +1,25 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+!DOCTYPE html>
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
-    <title>Captura de Webcam</title>
+    <title>Gravação de Webcam</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <h1>Visualização da Webcam</h1>
-    <video id="video" autoplay playsinline muted></video> <!-- muted evita reprodução de áudio -->
+    <h1>Gravação de Webcam</h1>
+    <video id="video" autoplay playsinline muted></video>
+
+    <div class="controls">
+        <button id="recordBtn">Iniciar Gravação</button>
+
+        <div id="saveOptions" style="display:none;">
+            <a id="downloadLink" download="gravacao.webm">Salvar Localmente</a>
+            <button id="cloudBtn">Salvar na Nuvem</button>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 
