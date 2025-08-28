@@ -1,16 +1,13 @@
 const video = document.getElementById('video');
-const prepareBtn = document.getElementById('prepareBtn');
-const configPanel = document.getElementById('configPanel');
+const recordBtn = document.getElementById('recordBtn');
+const stopBtn = document.getElementById('stopBtn');
+const saveOptions = document.getElementById('saveOptions');
 const filenameInput = document.getElementById('filename');
-const saveLocalBtn = document.getElementById('saveLocalBtn');
-const saveCloudBtn = document.getElementById('saveCloudBtn');
-const confirmBtn = document.getElementById('confirmBtn');
 const downloadLink = document.getElementById('downloadLink');
-const downloadSection = document.getElementById('downloadSection');
+const cloudBtn = document.getElementById('cloudBtn');
 
 let mediaRecorder;
 let recordedChunks = [];
-let saveLocation = null;
 
 async function startCamera() {
   try {
@@ -26,26 +23,20 @@ async function startCamera() {
 
 startCamera();
 
-prepareBtn.addEventListener('click', () => {
-  configPanel.style.display = 'block';
-  downloadSection.style.display = 'none';
+recordBtn.addEventListener('click', () => {
+  let countdown = 3;
+  const countdownInterval = setInterval(() => {
+    if (countdown > 0) {
+      alert(`Gravação começará em ${countdown} segundos...`);
+      countdown--;
+    } else {
+      clearInterval(countdownInterval);
+      startRecording();
+    }
+  }, 1000);
 });
 
-saveLocalBtn.addEventListener('click', () => {
-  saveLocation = 'local';
-});
-
-saveCloudBtn.addEventListener('click', () => {
-  saveLocation = 'cloud';
-});
-
-confirmBtn.addEventListener('click', () => {
-  const filename = filenameInput.value.trim() || 'gravacao';
-  if (!saveLocation) {
-    alert('Escolha onde deseja salvar o arquivo.');
-    return;
-  }
-
+function startRecording() {
   recordedChunks = [];
   mediaRecorder = new MediaRecorder(window.fullStream);
 
@@ -57,25 +48,28 @@ confirmBtn.addEventListener('click', () => {
 
   mediaRecorder.onstop = () => {
     const blob = new Blob(recordedChunks, { type: 'video/webm' });
+    const url = URL.createObjectURL(blob);
+    downloadLink.href = url;
 
-    if (saveLocation === 'local') {
-      const url = URL.createObjectURL(blob);
-      downloadLink.href = url;
-      downloadLink.download = `${filename}.webm`;
-      downloadSection.style.display = 'block';
-    } else {
-      window.recordedBlob = blob;
-      alert('Upload para nuvem será implementado na Parte 5.');
-    }
+    const filename = filenameInput.value.trim() || 'gravacao';
+    downloadLink.download = `${filename}.webm`;
+
+    window.recordedBlob = blob;
+    saveOptions.style.display = 'block';
   };
 
   mediaRecorder.start();
-  configPanel.style.display = 'none';
-  prepareBtn.textContent = 'Parar Gravação';
+  recordBtn.disabled = true;
+  stopBtn.disabled = false;
+  saveOptions.style.display = 'none';
+}
 
-  prepareBtn.onclick = () => {
-    mediaRecorder.stop();
-    prepareBtn.textContent = 'Gravar';
-    prepareBtn.onclick = null;
-  };
+stopBtn.addEventListener('click', () => {
+  mediaRecorder.stop();
+  recordBtn.disabled = false;
+  stopBtn.disabled = true;
+});
+
+cloudBtn.addEventListener('click', () => {
+  alert('Upload para nuvem será implementado na Parte 5.');
 });

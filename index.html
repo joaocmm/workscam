@@ -12,24 +12,15 @@
     <video id="video" autoplay playsinline muted></video>
 
     <div class="controls">
-        <button id="prepareBtn">Gravar</button>
+        <button id="recordBtn">Gravar</button>
+        <button id="stopBtn" disabled>Parar</button>
     </div>
 
-    <div id="configPanel" style="display:none;">
-        <h3>Configurações de Gravação</h3>
-        <label for="filename">Nome do arquivo:</label>
-        <input type="text" id="filename" placeholder="gravacao">
-
-        <div class="save-options">
-            <button id="saveLocalBtn">Salvar Localmente</button>
-            <button id="saveCloudBtn">Salvar na Nuvem</button>
-        </div>
-
-        <button id="confirmBtn">Autorizar e Iniciar Gravação</button>
-    </div>
-
-    <div id="downloadSection" style="display:none;">
-        <a id="downloadLink" download>Baixar Vídeo</a>
+    <div id="saveOptions" style="display:none;">
+        <h3>Salvar Gravação</h3>
+        <input type="text" id="filename" placeholder="Nome do arquivo">
+        <a id="downloadLink" download>Salvar Localmente</a>
+        <button id="cloudBtn">Salvar na Nuvem</button>
     </div>
 
     <script src="script.js"></script>

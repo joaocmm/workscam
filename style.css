@@ -12,7 +12,7 @@ video {
   border-radius: 8px;
 }
 
-.controls, .save-options {
+.controls, #saveOptions {
   margin-top: 20px;
 }
 
