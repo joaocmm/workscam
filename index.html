@@ -1,29 +1,27 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Gravação de Webcam</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Gravação de Webcam</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <h1>Gravação de Webcam</h1>
-    <video id="video" autoplay playsinline muted></video>
+  <h1>Gravação de Webcam</h1>
+  <div id="recordingIndicator" style="display:none;">🔴 Gravando...</div>
+  <video id="video" autoplay playsinline muted></video>
 
-    <div class="controls">
-        <button id="recordBtn">Gravar</button>
-        <button id="stopBtn" disabled>Parar</button>
-    </div>
+  <div class="controls">
+    <button id="recordBtn">Gravar</button>
+    <button id="stopBtn" disabled>Parar</button>
+  </div>
 
-    <div id="saveOptions" style="display:none;">
-        <h3>Salvar Gravação</h3>
-        <input type="text" id="filename" placeholder="Nome do arquivo">
-        <a id="downloadLink" download>Salvar Localmente</a>
-        <button id="cloudBtn">Salvar na Nuvem</button>
-    </div>
+  <div id="popup" class="popup" style="display:none;">
+    <h3>Escolha onde salvar</h3>
+    <input type="text" id="filename" placeholder="Nome do arquivo">
+    <button id="saveLocalBtn">Salvar Localmente</button>
+    <button id="saveCloudBtn">Salvar na Nuvem</button>
+  </div>
 
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
-
 </html>

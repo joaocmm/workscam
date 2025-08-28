@@ -1,10 +1,11 @@
 const video = document.getElementById('video');
 const recordBtn = document.getElementById('recordBtn');
 const stopBtn = document.getElementById('stopBtn');
-const saveOptions = document.getElementById('saveOptions');
+const recordingIndicator = document.getElementById('recordingIndicator');
+const popup = document.getElementById('popup');
 const filenameInput = document.getElementById('filename');
-const downloadLink = document.getElementById('downloadLink');
-const cloudBtn = document.getElementById('cloudBtn');
+const saveLocalBtn = document.getElementById('saveLocalBtn');
+const saveCloudBtn = document.getElementById('saveCloudBtn');
 
 let mediaRecorder;
 let recordedChunks = [];
@@ -24,7 +25,7 @@ async function startCamera() {
 startCamera();
 
 recordBtn.addEventListener('click', () => {
-  let countdown = 3;
+  let countdown = 5;
   const countdownInterval = setInterval(() => {
     if (countdown > 0) {
       alert(`Gravação começará em ${countdown} segundos...`);
@@ -47,29 +48,36 @@ function startRecording() {
   };
 
   mediaRecorder.onstop = () => {
-    const blob = new Blob(recordedChunks, { type: 'video/webm' });
-    const url = URL.createObjectURL(blob);
-    downloadLink.href = url;
-
-    const filename = filenameInput.value.trim() || 'gravacao';
-    downloadLink.download = `${filename}.webm`;
-
-    window.recordedBlob = blob;
-    saveOptions.style.display = 'block';
+    popup.style.display = 'block';
   };
 
   mediaRecorder.start();
+  recordingIndicator.style.display = 'block';
   recordBtn.disabled = true;
   stopBtn.disabled = false;
-  saveOptions.style.display = 'none';
 }
 
 stopBtn.addEventListener('click', () => {
   mediaRecorder.stop();
+  recordingIndicator.style.display = 'none';
   recordBtn.disabled = false;
   stopBtn.disabled = true;
 });
 
-cloudBtn.addEventListener('click', () => {
+saveLocalBtn.addEventListener('click', () => {
+  const blob = new Blob(recordedChunks, { type: 'video/webm' });
+  const url = URL.createObjectURL(blob);
+  const filename = filenameInput.value.trim() || 'gravacao';
+
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${filename}.webm`;
+  a.click();
+
+  popup.style.display = 'none';
+});
+
+saveCloudBtn.addEventListener('click', () => {
   alert('Upload para nuvem será implementado na Parte 5.');
+  popup.style.display = 'none';
 });

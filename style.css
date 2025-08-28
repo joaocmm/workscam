@@ -12,16 +12,21 @@ video {
   border-radius: 8px;
 }
 
-.controls, #saveOptions {
+#recordingIndicator {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.controls, .popup {
   margin-top: 20px;
 }
 
-button, a {
+button {
   padding: 10px 20px;
   margin: 5px;
   font-size: 16px;
   cursor: pointer;
-  text-decoration: none;
   color: white;
   background-color: #007bff;
   border: none;
@@ -33,4 +38,12 @@ input {
   font-size: 16px;
   margin-top: 10px;
   width: 200px;
+}
+
+.popup {
+  background-color: #fff;
+  border: 2px solid #333;
+  padding: 20px;
+  display: inline-block;
+  border-radius: 10px;
 }
