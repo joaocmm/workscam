@@ -26,12 +26,15 @@ startCamera();
 
 recordBtn.addEventListener('click', () => {
   let countdown = 5;
+  console.log(`Gravação começará em ${countdown} segundos...`);
+
   const countdownInterval = setInterval(() => {
+    countdown--;
     if (countdown > 0) {
-      alert(`Gravação começará em ${countdown} segundos...`);
-      countdown--;
+      console.log(`Gravação começará em ${countdown} segundos...`);
     } else {
       clearInterval(countdownInterval);
+      console.log("Gravação iniciada!");
       startRecording();
     }
   }, 1000);
